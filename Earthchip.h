@@ -76,6 +76,8 @@
 #define LIGHT_TOPIC            "/light"
 
 
+#define CONFIG_FILE_NAME  "/config.txt"
+
 #define MQTTQOS0        (0 << 1)
 #define MQTTQOS1        (1 << 1)
 #define MQTTQOS2        (2 << 1)
@@ -92,7 +94,10 @@
 
 #define CHECK_STRING_LENGTH(l,s) if (l+2+strnlen(s, this->bufferSize) > this->bufferSize) {_client->stop();return false;}
 
+
+
 class Earthchip : public Print {
+   
 private:
    Client* _client;
    uint8_t* buffer;
@@ -119,6 +124,8 @@ private:
    uint16_t port;
    Stream* stream;
    int _state;
+   String node_id;
+   
 public:
    Earthchip();
    Earthchip(Client& client);
@@ -186,8 +193,11 @@ public:
    int state();
    boolean pushTemp(double temp);
    boolean pushTemp(const char* temp);
-   void retrieve();
-
+   String retrieve();
+   boolean mountFS();
+   // boolean openFS();
+   String readFS();
+   String writeFS();
 };
 
 
