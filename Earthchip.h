@@ -6,6 +6,8 @@
 #include "IPAddress.h"
 #include "Client.h"
 #include "Stream.h"
+#include<string>  
+
 
 #define MQTT_VERSION_3_1      3
 #define MQTT_VERSION_3_1_1    4
@@ -64,7 +66,15 @@
 #define MQTTDISCONNECT  14 << 4 // Client is Disconnecting
 #define MQTTReserved    15 << 4 // Reserved
 
-#define TEMP_TOPIC      "/humidity"
+#define DEFAULT_PLENGTH            10
+
+
+//OFF THE SHELF CARACTERISTICS
+#define TEMPERATURE_TOPIC      "/temperature"
+#define HUMIDITY_TOPIC         "/humidity"
+#define MOISTURE_TOPIC         "/moisture"
+#define LIGHT_TOPIC            "/light"
+
 
 #define MQTTQOS0        (0 << 1)
 #define MQTTQOS1        (1 << 1)
@@ -174,7 +184,10 @@ public:
    boolean loop();
    boolean connected();
    int state();
+   boolean pushTemp(double temp);
    boolean pushTemp(const char* temp);
+   void retrieve();
+
 };
 
 

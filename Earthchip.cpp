@@ -1,6 +1,7 @@
 
 #include "Earthchip.h"
 #include "Arduino.h"
+#include <FS.h>   //Include File System Headers
 
 Earthchip::Earthchip() {
     this->_state = MQTT_DISCONNECTED;
@@ -744,6 +745,23 @@ Earthchip& Earthchip::setSocketTimeout(uint16_t timeout) {
     return *this;
 }
 
+//OFF THE SHELF PUSH METHODS
+boolean Earthchip::pushTemp(double temp) {
+    return publish(TEMPERATURE_TOPIC, String(temp).c_str());
+}
+
 boolean Earthchip::pushTemp(const char* temp) {
-    return publish(TEMP_TOPIC, temp);
+    return publish(TEMPERATURE_TOPIC, temp);
+}
+
+void retrieve () {
+ //Initialize File System
+  if(SPIFFS.begin())
+  {
+
+  }
+  else
+  {
+  }
+
 }
